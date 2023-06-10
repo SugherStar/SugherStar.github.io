@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>落鲸起始页</title>
     <link rel="stylesheet" href="beginPageCss1.css" type="text/css">
+    <script src="search-suggestions.js"></script>
   </head>
   <div class="msg_desc">
   <img style="max-width:100%;overflow:hidden;" src="https://picdl.sunbangyan.cn/2023/06/10/p29nta.jpg" alt="">
@@ -19,6 +20,7 @@
           <form action="http://www.baidu.com/s?q=" method="get" target="_parent" id="searchForm">
             <input type="hidden" name="hiddenInput" value="3"/>
             <input type="text" name="wd" placeholder="让我瞧瞧，你要找什么？" id="searchInput" autocomplete="off"/>
+            <div id="search-suggestions"></div>
             <input type="submit" value="" id="confirmInput"/>
             <!-- 确定按钮简化为一个小圆圈。 -->
           </form>
