@@ -21,7 +21,7 @@ body {
 
 /* 两个盒子的属性主要是为了进行定位 */
 .backgroundBox1 {
-  background-color: inherit;
+  background-color: unset;
   width: 600px;
   height: 400px;
   position: absolute;
@@ -31,7 +31,7 @@ body {
   margin-top: -200px;
 }
 .backgroundBox2 {
-  background-color: inherit;
+  background-color: unset;
   width: inherit;
   height: inherit;
   position: relative;
