@@ -1,220 +1,403 @@
-*{
-  /* 清除所有的padding、margin和border */
-  margin: 0;
-  padding: 0;
-  border: 0;
+:root {
+  color-scheme: light;
+  --bg: #f4f7fb;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-solid: #fff;
+  --surface-hover: rgba(255, 255, 255, 0.96);
+  --text: #172033;
+  --muted: #697386;
+  --line: rgba(51, 65, 85, 0.1);
+  --accent: #1479ff;
+  --accent-strong: #0866df;
+  --accent-soft: rgba(20, 121, 255, 0.12);
+  --shadow: 0 18px 50px rgba(36, 52, 76, 0.11), 0 2px 10px rgba(36, 52, 76, 0.05);
+  --shadow-small: 0 8px 24px rgba(36, 52, 76, 0.09);
+  --focus: 0 0 0 4px rgba(20, 121, 255, 0.2);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --safe-top: max(18px, env(safe-area-inset-top));
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
-img{height: auto; width: auto\9; width:100%;}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1018;
+  --surface: rgba(22, 30, 43, 0.8);
+  --surface-solid: #151d29;
+  --surface-hover: rgba(30, 40, 56, 0.98);
+  --text: #f3f6fb;
+  --muted: #9aa7bb;
+  --line: rgba(255, 255, 255, 0.09);
+  --accent: #4d9bff;
+  --accent-strong: #72adff;
+  --accent-soft: rgba(77, 155, 255, 0.17);
+  --shadow: 0 22px 58px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2);
+  --shadow-small: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0b1018;
+    --surface: rgba(22, 30, 43, 0.8);
+    --surface-solid: #151d29;
+    --surface-hover: rgba(30, 40, 56, 0.98);
+    --text: #f3f6fb;
+    --muted: #9aa7bb;
+    --line: rgba(255, 255, 255, 0.09);
+    --accent: #4d9bff;
+    --accent-strong: #72adff;
+    --accent-soft: rgba(77, 155, 255, 0.17);
+    --shadow: 0 22px 58px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2);
+    --shadow-small: 0 10px 28px rgba(0, 0, 0, 0.22);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { min-height: 100%; scroll-behavior: smooth; }
+
 body {
-  background-color: #EFEEEE;
-  /* 长按鼠标并滑动的时候回选中框内的内容，这里禁止选中所有文本。 */
-  -moz-user-select:none;/*火狐*/
-  -webkit-user-select:none;/*webkit浏览器*/
-  -ms-user-select:none;/*IE10*/
-  -khtml-user-select:none;/*早期浏览器*/
-  user-select:none;
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 220ms ease, color 220ms ease;
 }
 
-/*
- * 以下是背景盒子的属性设置
- */
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { color: inherit; }
 
-/* 两个盒子的属性主要是为了进行定位 */
-.backgroundBox1 {
-  background-color: unset;
-  width: 600px;
-  height: 400px;
-  position: absolute;
-  left: 50%;
-  margin-left: -300px;
-  top: 50%;
-  margin-top: -200px;
-}
-.backgroundBox2 {
-  background-color: unset;
-  width: inherit;
-  height: inherit;
-  position: relative;
-}
-
-/*
- * 以下是有关的搜索框的布局
- */
-
-#backgroundFormStyle {
-  position: relative;
-  height: 20%;
-  width: inherit;
-}
-#searchForm {
-  /* 搜索框的属性设置 */
-  position: absolute;
-  width: 500px;
-  height: 40px;
-  /* 盒子居中 */
-  top: 50%;
-  margin-top: -20px;
-  left: 50%;
-  margin-left: -250px;
-  /* 圆角属性，可以根据自己的喜好调节，50%盒子就是个圆形 */
-  border-radius: 20px;
-  /* 两个阴影属性，做出凸起的效果。 */
-  /* 第一个阴影为白色，向左和上移动。 */
-  /* 第二个阴影为黑色，向右和下移动。 */
-  /* 参数分别为：x方向偏移 y方向偏移 阴影模糊半径 颜色 */
-  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.2),
-   -12px -12px 20px rgba(255, 255, 255, 1);
-}
-/* 注意：这里是搜索框的样式，和网站入口按钮不同，没有鼠标悬停点击等状态效果。 */
-#searchInput {
-  width: 90%;
-  height: inherit;
-  margin-left: 20px;
-  background-color: inherit;
-  /* outline用来清除点击搜索框的时候出现一个黑色小边框 */
-  outline: none;
-}
-#confirmInput {
-  /* 把确认按钮变成黑色边框小圆圈 */
-  width: 5%;
-  height: 20px;
-  width: 20px;
-  background-color: white;
-  position: absolute;
-  right: 10;
-  top: 50%;
-  margin-top: -10px;
-  border-radius: 50%;
-  border-color: black;
-  border-width: thick;
-  border-style: solid;
-  outline: none;
-}
-#confirmInput:hover {
-  /* 鼠标悬停到确认按钮上变成小手手 */
-  cursor: pointer;
-}
-
-/*
- * 下面是关于网站入口的按钮布局
- */
-
-.iconBackBoxAll {
-  position: absolute;
-  /* 横向居中 */
-  left: 50%;
-  margin-left: -240px;
-  bottom: 0;
-  width: 480px;
-  height: 70%;
-}
-.iconBackBoxAll>a {
-  background-color: inherit;
-  position: relative;
-  /* 使用左浮动来布局，如果您的网站入口不是8个，建议另外进行布局 */
-  float: left;
-  width: 80px;
-  height: 80px;
-  margin: 20px;
-  border-radius: 20%;
-  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.2),
-   -12px -12px 20px rgba(255, 255, 255, 1);
-  /* 小手手 */
-  cursor: pointer;
-  /* 动画，阴影过度，做出一个纸面下凹的效果。 */
-  /* 参数：需要改变的样式（all是所有）  改变的时间  速度函数 */
-  /* 注意注意注意！！！！
-   * 这里必须填写速度函数，即便默认曲线就是ease，我也没搞清楚为啥。
-   * 后面需要从外阴影过渡到内阴影。在测试的时候，如果不写速度函数曲线没有效果。
-   * 其他样式，比如改变盒子宽高颜色没啥问题。希望有大佬帮忙解答一下原因。
-   */
-  transition: all .2s ease;
-}
-.iconBackBoxAll>a img {
-  /* 图片定位 */
-  position: absolute;
-  width: 46px;
-  height: 46px;
-  top: 50%;
-  margin-top: -30px;
-  left: 50%;
-  margin-left: -23px;
-}
-.iconBackBox>div {
-  /* 文本定位 */
-  position: absolute;
-  width: 60px;
-  bottom: 5px;
-  left: 50%;
-  margin-left: -30px;
-  text-align: center;
-}
-.iconBackBox>div p {
-  /* 文本样式 */
-  color: #6B6B6B;
-  font-size: 12px;
-}
-
-/*
- * 下面是关于网站入口的伪类选择器
- */
-
-.iconBackBoxAll>a:hover {
-  /* 这里改变盒子阴影 */
-  /*
-   * 四个参数：
-   * 前两个是黑白阴影从外阴影过渡到没有阴影
-   * 后连个是黑白阴影从没有阴影过渡到内阴影
-   */
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2),
-   0px 0px 0px rgba(255, 255, 255, 1),
-  12px 12px 20px rgba(0, 0, 0, 0.2) inset,
-   -12px -12px 20px rgba(255, 255, 255, 1) inset;
-}
-.iconBackBoxAll>a:active {
-  /* 点击时改变样式，加深效果 */
-   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2) inset,
-    -10px -10px 30px rgba(255, 255, 255, 1) inset;
-}
-
-
-/*
- * 下面是对于增加和删除按钮的属性设置
- */
-
- /* 这里两个按钮没有功能，在删除html文件中的两个按钮的同时，可以选择删除这里的样式 */
- /* 具体的思路和网站入口一样 */
-.setButtonBox {
-  /* background-color: red; */
+.skip-link {
   position: fixed;
-  right: 100px; bottom: 50px;
+  z-index: 100;
+  top: 10px;
+  left: 10px;
+  padding: 10px 14px;
+  transform: translateY(calc(-100% - 22px));
+  visibility: hidden;
+  opacity: 0;
+  border-radius: 10px;
+  background: var(--surface-solid);
+  color: var(--text);
 }
-.setButtonBox button{
-  width: 40px;
-  height: 40px;
-  margin: 15px;
+.skip-link:focus { transform: translateY(0); visibility: visible; opacity: 1; }
+
+.ambient {
+  position: fixed;
+  z-index: -1;
+  width: min(48vw, 660px);
+  aspect-ratio: 1;
   border-radius: 50%;
-  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.2),
-   -12px -12px 20px rgba(255, 255, 255, 1);
+  filter: blur(2px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.ambient-one { top: -28vw; right: -14vw; background: radial-gradient(circle, rgba(95, 174, 255, 0.2), transparent 68%); }
+.ambient-two { bottom: -30vw; left: -20vw; background: radial-gradient(circle, rgba(139, 116, 255, 0.13), transparent 68%); }
+
+.topbar {
+  width: min(1120px, calc(100% - 36px));
+  height: 72px;
+  margin: 0 auto;
+  padding-top: var(--safe-top);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+  box-shadow: var(--shadow-small);
+}
+.brand-mark svg { width: 24px; fill: var(--accent); }
+
+.icon-button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow-small);
   cursor: pointer;
-  outline: none;
-  transition: all .2s ease;
+  transition: transform 160ms ease, background-color 160ms ease;
 }
-#addBut {
-  background-image: url(icon/addButton.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+.topbar-actions { display: flex; align-items: center; gap: 9px; }
+.text-button {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 21px;
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: var(--shadow-small);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease;
 }
-.setButtonBox button:hover{
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2),
-   0px 0px 0px rgba(255, 255, 255, 1),
-  12px 12px 20px rgba(0, 0, 0, 0.2) inset,
-   -12px -12px 20px rgba(255, 255, 255, 1) inset;
+.text-button:hover { transform: translateY(-2px); background: var(--surface-hover); color: var(--text); }
+.icon-button:hover { transform: translateY(-2px); background: var(--surface-hover); }
+.icon-button:active { transform: scale(0.95); }
+.icon-button svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.moon-icon { display: none; }
+:root[data-theme="dark"] .sun-icon { display: none; }
+:root[data-theme="dark"] .moon-icon { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sun-icon { display: none; }
+  :root:not([data-theme="light"]) .moon-icon { display: block; }
 }
-#deleteBut {
-  background-image: url(icon/delete.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+
+.page-shell { width: min(1000px, calc(100% - 36px)); margin: 0 auto; }
+
+.hero { padding: clamp(74px, 11vh, 130px) 0 clamp(64px, 10vh, 110px); text-align: center; }
+.date-text { margin: 0 0 12px; color: var(--accent); font-size: 14px; font-weight: 650; letter-spacing: 0.08em; }
+h1 { margin: 0; font-size: clamp(32px, 5vw, 56px); line-height: 1.12; letter-spacing: -0.045em; }
+.clock { min-height: 22px; margin: 14px 0 0; color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; }
+
+.search { position: relative; z-index: 10; width: min(720px, 100%); margin: 38px auto 0; text-align: left; }
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  padding: 7px 7px 7px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.search:focus-within .search-box { border-color: color-mix(in srgb, var(--accent) 45%, transparent); box-shadow: var(--shadow), var(--focus); background: var(--surface-hover); }
+.search-icon { flex: 0 0 auto; width: 23px; margin-right: 13px; fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; }
+.search input { min-width: 0; height: 50px; flex: 1; padding: 0; border: 0; outline: 0; background: transparent; color: var(--text); font-size: 17px; }
+.search input::placeholder { color: var(--muted); opacity: 0.82; }
+.search input::-webkit-search-cancel-button { display: none; }
+.clear-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  cursor: pointer;
+}
+.clear-button[hidden] { display: none; }
+.clear-button svg { width: 18px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+.search-button {
+  display: flex;
+  min-width: 92px;
+  height: 52px;
+  margin-left: 10px;
+  padding: 0 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(20, 121, 255, 0.24);
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+.search-button:hover { background: var(--accent-strong); transform: translateY(-1px); }
+.search-button:active { transform: scale(0.97); }
+.search-button svg { width: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  left: 0;
+  max-height: min(420px, 50vh);
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-solid);
+  box-shadow: var(--shadow);
+  list-style: none;
+}
+.suggestions[hidden] { display: none; }
+.suggestion-item { margin: 0; border-radius: 12px; }
+.suggestion-button {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.suggestion-button::before { content: ""; width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--accent); opacity: 0.6; }
+.suggestion-item[aria-selected="true"] .suggestion-button,
+.suggestion-button:hover { background: var(--accent-soft); }
+
+.favorites { padding-bottom: 70px; }
+.section-heading { display: flex; margin-bottom: 22px; align-items: end; justify-content: space-between; }
+.eyebrow { margin: 0 0 7px; color: var(--accent); font-size: 11px; font-weight: 750; letter-spacing: 0.13em; }
+h2 { margin: 0; font-size: clamp(23px, 3vw, 29px); letter-spacing: -0.035em; }
+.manage-button {
+  display: flex;
+  height: 40px;
+  padding: 0 14px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 160ms ease, color 160ms ease, background-color 160ms ease;
+}
+.manage-button:hover { transform: translateY(-2px); color: var(--text); background: var(--surface-hover); }
+.manage-button svg { width: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.shortcut-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+.shortcut-card {
+  position: relative;
+  display: flex;
+  min-height: 122px;
+  padding: 18px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: var(--shadow-small);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.shortcut-card::after { content: ""; position: absolute; right: -24px; bottom: -28px; width: 85px; height: 85px; border-radius: 50%; background: var(--card-color); opacity: 0.08; }
+.shortcut-card:hover { transform: translateY(-4px); background: var(--surface-hover); box-shadow: var(--shadow); }
+.shortcut-card:active { transform: scale(0.98); }
+.shortcut-icon { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 13px; background: color-mix(in srgb, var(--card-color) 14%, transparent); color: var(--card-color); font-size: 16px; font-weight: 800; letter-spacing: -0.03em; }
+.shortcut-meta { display: flex; align-items: end; justify-content: space-between; gap: 8px; }
+.shortcut-name { overflow: hidden; font-size: 15px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.shortcut-arrow { color: var(--muted); font-size: 17px; line-height: 1; transition: transform 160ms ease; }
+.shortcut-card:hover .shortcut-arrow { transform: translate(2px, -2px); }
+
+footer { padding: 4px 20px max(28px, env(safe-area-inset-bottom)); color: var(--muted); font-size: 13px; text-align: center; }
+.shortcut-dialog {
+  width: min(620px, calc(100% - 24px));
+  max-height: min(760px, calc(100svh - 32px));
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--surface-solid);
+  color: var(--text);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+}
+.shortcut-dialog::backdrop { background: rgba(5, 10, 18, 0.48); backdrop-filter: blur(5px); }
+.dialog-header { display: flex; padding: 25px 25px 15px; align-items: start; justify-content: space-between; }
+.dialog-close { width: 38px; height: 38px; box-shadow: none; }
+.dialog-description { margin: 0; padding: 0 25px 18px; color: var(--muted); font-size: 14px; }
+.editable-shortcuts { max-height: 250px; padding: 0 25px; overflow-y: auto; }
+.editable-row { display: flex; min-height: 52px; padding: 8px 0; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); }
+.editable-row:last-child { border-bottom: 0; }
+.editable-icon { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 800; }
+.editable-info { min-width: 0; flex: 1; }
+.editable-name, .editable-url { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.editable-name { font-size: 14px; font-weight: 650; }
+.editable-url { margin-top: 2px; color: var(--muted); font-size: 11px; }
+.delete-shortcut { width: 34px; height: 34px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); cursor: pointer; }
+.delete-shortcut:hover { background: rgba(220, 38, 38, 0.1); color: #e5484d; }
+.add-shortcut { display: grid; grid-template-columns: 0.8fr 1.2fr auto; gap: 10px; margin: 18px 25px; padding: 16px; border: 1px solid var(--line); border-radius: 17px; background: var(--bg); }
+.add-shortcut label { min-width: 0; }
+.add-shortcut label span { display: block; margin: 0 0 6px 2px; color: var(--muted); font-size: 11px; font-weight: 650; }
+.add-shortcut input { width: 100%; height: 40px; padding: 0 11px; border: 1px solid var(--line); border-radius: 10px; outline: 0; background: var(--surface-solid); color: var(--text); }
+.add-shortcut input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.primary-button, .done-button, .reset-button { height: 40px; align-self: end; padding: 0 15px; border-radius: 11px; font-weight: 650; cursor: pointer; }
+.primary-button, .done-button { border: 0; background: var(--accent); color: #fff; }
+.reset-button { border: 0; background: transparent; color: var(--muted); }
+.reset-button:hover { color: #e5484d; }
+.dialog-footer { display: flex; padding: 0 25px 24px; align-items: center; justify-content: space-between; }
+.dialog-footer .done-button { min-width: 88px; }
+.noscript { position: fixed; right: 16px; bottom: 16px; left: 16px; z-index: 50; padding: 14px; border-radius: 12px; background: #b42318; color: #fff; text-align: center; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.search input:focus-visible { outline: 0; }
+
+@media (max-width: 760px) {
+  .shortcut-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero { padding-top: 62px; }
+}
+
+@media (max-width: 520px) {
+  .topbar, .page-shell { width: min(100% - 24px, 1000px); }
+  .topbar { height: 64px; }
+  .hero { padding: 54px 0 70px; }
+  .clock { margin-top: 10px; }
+  .search { margin-top: 30px; }
+  .search-box { min-height: 60px; padding: 6px 6px 6px 17px; border-radius: 18px; }
+  .search-icon { width: 21px; margin-right: 10px; }
+  .search input { font-size: 16px; }
+  .search-button { min-width: 50px; width: 50px; height: 48px; padding: 0; border-radius: 13px; }
+  .search-button span { display: none; }
+  .shortcut-grid { gap: 11px; }
+  .shortcut-card { min-height: 112px; padding: 15px; border-radius: 17px; }
+  .manage-button span { display: none; }
+  .manage-button { width: 40px; padding: 0; justify-content: center; }
+  .shortcut-dialog { border-radius: 22px; }
+  .add-shortcut { grid-template-columns: 1fr; }
+  .primary-button { width: 100%; }
+}
+
+@media (max-width: 350px) {
+  .shortcut-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .search-box, .topbar, .shortcut-card { background: var(--surface-solid); }
 }
