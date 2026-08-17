@@ -1,91 +1,136 @@
-<!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
+<!doctype html>
+<html lang="zh-CN">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f7fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="description"
+      content="落鲸起始页：轻量、舒适、支持深浅主题、国际化与自定义网站的浏览器主页。"
+    />
+    <meta name="color-scheme" content="light dark" />
     <title>落鲸起始页</title>
-    <link rel="stylesheet" href="beginPageCss1.css" type="text/css">
-    <script src="search-suggestions.js"></script>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("luojing-theme");
+        if (savedTheme === "light" || savedTheme === "dark") document.documentElement.dataset.theme = savedTheme;
+      } catch (_) {}
+    </script>
+    <link rel="stylesheet" href="beginPageCss1.css" />
+    <script src="search-suggestions.js" defer></script>
   </head>
-  <div class="msg_desc">
-  <img style="max-width:100%;overflow:hidden;" src="https://picdl.sunbangyan.cn/2023/06/10/p29nta.jpg" alt="">
-  </div>
   <body>
-      <div class="msg_desc">
-    </div>
-    <div class="backgroundBox1">
-      <div class="backgroundBox2">
-        <!-- backgroundFormStyle盒子里面放的是整个搜索框 -->
-        <!-- 这里使用百度搜索引擎。 -->
-        <div id="backgroundFormStyle">
-          <form action="http://www.baidu.com/s?q=" method="get" target="_parent" id="searchForm">
-            <input type="hidden" name="hiddenInput" value="3"/>
-            <input type="text" name="wd" placeholder="让我瞧瞧，你要找什么？" id="searchInput" autocomplete="off"/>
-            <input type="submit" value="" id="confirmInput"/>
-            <!-- 确定按钮简化为一个小圆圈。 -->
-          </form>
-        </div>
-        <div class="iconBackBoxAll">
-          <!-- 每一个网站入口包含两个信息，图片和名称。 -->
-          <!-- 在href中填写网站的地址，p标签中填写名字。 -->
-          <!-- 不涉及JavaScript的话，建议使用a标签实现链接。 -->
-          <a class="iconBackBox" href="https://www.bilibili.com/">
-            <img src="icon/bilibili.png" alt="图被吃了">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>bilibili</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://github.com/">
-            <img src="icon/github.png" alt="图被吃了">
-            <div>
-              <p>github</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://www.csdn.net/">
-            <img src="icon/csdn.png" alt="图被吃了">
-            <div>
-              <p>csdn</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://www.iconfont.cn/">
-            <img src="icon/iconfont.png" alt="图被吃了">
-            <div>
-              <p>iconfont</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://outlook.live.com/mail/">
-            <img src="icon/outlook.png" alt="图被吃了">
-            <div>
-              <p>Outlook邮箱</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://www.cnki.net/">
-            <img src="icon/中国知网.png" alt="图被吃了">
-            <div>
-              <p>中国知网</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://mcbbs.net/">
-            <img src="icon/mcbbs.png" alt="图被吃了">
-            <div>
-              <p>MCBBS</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="http://www.ixigua.com/">
-            <img src="icon/西瓜视频.png" alt="图被吃了">
-            <div>
-              <p>西瓜视频</p>
-            </div>
-          </a>
-        </div>
+    <a class="skip-link" href="#search-input">跳到搜索</a>
+
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="落鲸起始页首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M5.2 17.2c2.7 1.1 5.2.7 7.3-1.2 1.6-1.4 2.3-3.7 1.7-5.8 4.9.3 9.4 3.3 11.4 7.9-1.9-.6-4-.3-5.7.7-2 1.2-3.4 3.2-3.8 5.5-4.7-.1-9.1-2.8-10.9-7.1Z"/><path d="M20.2 11.2c1.2-2.2 3.4-3.7 5.9-4-.2 2.6-1.7 4.8-4 6.1"/></svg>
+        </span>
+        <span>落鲸</span>
+      </a>
+
+      <div class="topbar-actions">
+        <button class="text-button" id="language-toggle" type="button" aria-label="Switch to English" title="Language">EN</button>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换为深色主题" title="切换主题">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/></svg>
+        </button>
       </div>
-    </div>
-    <!-- 下面是添加和删除的按钮，这里暂未实现功能，先放这里配个像。不想要可以删除 -->
-    <div class="setButtonBox">
-      <p>暂未实现功能[添加/删除收藏网页]</p>
-      <button type="button" name="button" autocomplete="off" id="addBut"></button>
-      <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
-    </div>
-    <!-- 以下是JavaScript文件 （还没写）-->
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="greeting">
+        <div class="time-block" aria-live="off">
+          <p id="date-text" class="date-text"></p>
+          <h1 id="greeting">你好，今天想找点什么？</h1>
+          <p class="clock" id="clock" aria-label="当前时间"></p>
+        </div>
+
+        <form class="search" id="search-form" action="https://www.bing.com/search" method="get" role="search" autocomplete="off">
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <label class="visually-hidden" for="search-input" data-i18n="searchLabel">使用 Bing 搜索</label>
+            <input
+              id="search-input"
+              name="q"
+              type="search"
+              inputmode="search"
+              placeholder="使用 Bing 搜索网页、知识与灵感"
+              aria-autocomplete="list"
+              aria-controls="suggestions"
+              aria-expanded="false"
+              aria-activedescendant=""
+              maxlength="200"
+            />
+            <button class="clear-button" id="clear-search" type="button" aria-label="清空搜索内容" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8 8 8M16 8l-8 8"/></svg>
+            </button>
+            <button class="search-button" type="submit" aria-label="搜索">
+              <span data-i18n="searchButton">搜索</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <ul class="suggestions" id="suggestions" role="listbox" aria-label="搜索建议" hidden></ul>
+          <p class="search-status visually-hidden" id="search-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="favorites" aria-labelledby="favorites-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="quickAccess">QUICK ACCESS</p>
+            <h2 id="favorites-title" data-i18n="favoritesTitle">常用网站</h2>
+          </div>
+          <button class="manage-button" id="manage-shortcuts" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
+            <span data-i18n="customize">自定义</span>
+          </button>
+        </div>
+        <div class="shortcut-grid" id="shortcut-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p data-i18n="footer">保持简单，专注此刻。</p>
+    </footer>
+
+    <dialog class="shortcut-dialog" id="shortcut-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow" data-i18n="personalize">PERSONALIZE</p>
+          <h2 id="dialog-title" data-i18n="manageTitle">管理常用网站</h2>
+        </div>
+        <button class="icon-button dialog-close" id="dialog-close" type="button" aria-label="关闭">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8 8 8M16 8l-8 8"/></svg>
+        </button>
+      </div>
+      <p class="dialog-description" data-i18n="manageDescription">添加你常用的网站，设置只保存在当前浏览器中。</p>
+      <div class="editable-shortcuts" id="editable-shortcuts"></div>
+      <form class="add-shortcut" id="add-shortcut-form">
+        <label>
+          <span data-i18n="siteName">网站名称</span>
+          <input id="shortcut-name" maxlength="24" required placeholder="例如：Notion" />
+        </label>
+        <label>
+          <span data-i18n="siteUrl">网站地址</span>
+          <input id="shortcut-url" type="url" required placeholder="https://notion.so" />
+        </label>
+        <button class="primary-button" type="submit" data-i18n="addSite">添加网站</button>
+      </form>
+      <div class="dialog-footer">
+        <button class="reset-button" id="reset-shortcuts" type="button" data-i18n="restoreDefaults">恢复默认</button>
+        <button class="done-button" id="dialog-done" type="button" data-i18n="done">完成</button>
+      </div>
+    </dialog>
+
+    <noscript>
+      <div class="noscript">启用 JavaScript 后可使用搜索建议、主题切换与快捷入口。</div>
+    </noscript>
   </body>
 </html>
